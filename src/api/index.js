@@ -4,8 +4,7 @@ const url = 'https://cors-anywhere.herokuapp.com/https://owner-api.teslamotors.c
 
 const AUTHORIZATION_KEY = process.env.REACT_APP_TESLA_AUTHORIZATION_KEY;
 const headers = {
-    // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-     'Authorization': `Bearer ${AUTHORIZATION_KEY}`,
+      'Authorization': `Bearer ${AUTHORIZATION_KEY}`,
     };
  
 
@@ -26,7 +25,6 @@ export const fetchData = async () => {
 
 export const fetchDetailedInfo = async (id) => {
     const detailsUrl = `${url}/${id}/vehicle_data`
-    
   
     try {
       const response = await axios.get(detailsUrl, {headers})
@@ -34,20 +32,13 @@ export const fetchDetailedInfo = async (id) => {
        return response 
   
     } catch (error) {
-      console.log("Error")
+       return error
     }
-   }
+}
 
 
-export const fetchDetails =  async(id) => {
-     console.log("id", id)
-       
+export const fetchDetails =  async(id) => {   
     const detailsUrl = `${url}/${id}/data_request/vehicle_state`
-    const headers = {
-        // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-         'Authorization': `Bearer ${AUTHORIZATION_KEY}`,
-        };
-
  
     try {
         const { data: { response } } = await axios.get(detailsUrl, { headers });
@@ -55,9 +46,8 @@ export const fetchDetails =  async(id) => {
         return { response };
         
     } catch (error) {
+        console.log("Error")
         return error
-        
     }
-  
  
  }

@@ -5,8 +5,6 @@ import { CardContent, Typography, Grid } from '@material-ui/core';
 import Details from './components/Details';
 
  
- 
-
 
  class App extends React.Component {
   state = {
@@ -20,17 +18,11 @@ import Details from './components/Details';
     this.setState({ data: fetchedData });
   }
 
-
-   
- 
-
  handleSubmit = async (e, id) => {
    e.preventDefault()
    const response = await fetchDetailedInfo(id)
    this.setState({details: response})
-
-   console.log("vehicles", response)
-     
+   console.log("details", response)
  }
 
 
@@ -54,12 +46,12 @@ import Details from './components/Details';
 
                     <CardContent>
                       <Typography color="textSecondary" gutterBottom>Name: {vehicle.display_name}</Typography >
-                      <Typography color="textSecondary">ID: {vehicle.id}</Typography>
+                      <Typography color="textSecondary">ID: {vehicle.id_s}</Typography>
                       <Typography color="textSecondary">VIN: {vehicle.vin}</Typography>
                       <Typography color="textSecondary">State: {vehicle.state}</Typography>
                       
  
-                     <form onClick = {e => this.handleSubmit(e, vehicle.id)}>
+                     <form onClick = {e => this.handleSubmit(e, vehicle.id_s)}>
                          <button className="button" type="submit" value="Get Details" >Get Details</button>
                       </form>  
 
