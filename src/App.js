@@ -8,7 +8,7 @@ import InfoIcon from '@material-ui/icons/Info';
  class App extends React.Component {
   state = {
     data: {},
-    details: {},
+  //  details: {},
     myCars: [],
     }
 
@@ -43,8 +43,8 @@ import InfoIcon from '@material-ui/icons/Info';
       return "Loading"
     }
 
-    let detailsExist = !!details.data
-    console.log("detailsExist", detailsExist)
+   // let detailsExist = !!details.data
+   // console.log("detailsExist", detailsExist)
 
     return (
       <div className={styles.container}>
@@ -70,9 +70,9 @@ import InfoIcon from '@material-ui/icons/Info';
          </Grid>
  
 
-         <form onClick = {e => this.handleDetails(e)}>
-                  <Button color="primary" variant="contained" startIcon={<InfoIcon />}>Details</Button>
-        </form>  
+        {/* <form onClick = {e => this.handleDetails(e)}> */}
+                  <Button onClick = {e => this.handleDetails(e)} color="primary" variant="contained" startIcon={<InfoIcon />}>Details</Button>
+        {/* </form>   */}
  
 
          <Grid container sapcing={3} justify="space-evenly" >

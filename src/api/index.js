@@ -41,7 +41,7 @@ export const fetchDetailedInfo = async (id) => {
     }
 }
 
-
+/* 
 export const fetchDetails =  async(id) => {   
     const detailsUrl = `${url}/${id}/data_request/vehicle_state`
  
@@ -56,6 +56,7 @@ export const fetchDetails =  async(id) => {
     }
  
  }
+  */
 
 
  export const honk =  async(id) => {   
@@ -65,7 +66,7 @@ export const fetchDetails =  async(id) => {
     try {
         const response = await axios.post(honkUrl, null, { headers });
  
-        return response;
+        return response
         
     } catch (error) {
         console.log("Error")

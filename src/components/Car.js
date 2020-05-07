@@ -43,11 +43,11 @@ const Car = ( {car} ) => {
                     <Typography color="textSecondary" >Outside Temp: {Math.floor(car.data.response.climate_state.outside_temp)}℃</Typography >   
          
 
-                    {console.log("id_s", car.data.response.id_s)}
-                    <form onClick = {e => handleHonk(e, car.data.response.id_s)}>
+                    {/* {console.log("id_s", car.data.response.id_s)} */}
+                    {/* <form onClick = {e => handleHonk(e, car.data.response.id_s)}> */}
 
-                        <Button variant="contained" color="default" startIcon={<WarningIcon />}>Honk</Button>
-                    </form>
+                        <Button nClick = {e => handleHonk(e, car.data.response.id_s)} variant="contained" color="default" startIcon={<WarningIcon />}>Honk</Button>
+                    {/* </form> */}
 
                 </CardContent>
             </Grid>
