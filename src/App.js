@@ -1,16 +1,15 @@
 import React from 'react';
 import styles from './App.module.css';
 import { fetchData, fetchDetailedInfo } from './api/';
-import { CardContent, Typography, Grid } from '@material-ui/core';
+import { CardContent, Typography, Grid, Button} from '@material-ui/core';
 import Car from './components/Car';
-
+import InfoIcon from '@material-ui/icons/Info';
 
  class App extends React.Component {
   state = {
     data: {},
     details: {},
     myCars: [],
-    command: {}
     }
 
   async componentDidMount() {
@@ -69,11 +68,13 @@ import Car from './components/Car';
 
                 
          </Grid>
+ 
 
          <form onClick = {e => this.handleDetails(e)}>
-                  <button className="button" type="submit" value="Get Details" >Get Detailed Info</button>
+                  <Button color="primary" variant="contained" startIcon={<InfoIcon />}>Details</Button>
         </form>  
  
+
          <Grid container sapcing={3} justify="space-evenly" >
  
                    { myCars.map( (car, id) => <Car car={car} key={id}/> )  }

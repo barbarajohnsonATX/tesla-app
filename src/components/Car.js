@@ -1,9 +1,9 @@
 import React from 'react';
  
-import { CardContent, Typography, Grid } from '@material-ui/core';
+import { CardContent, Typography, Grid, Button } from '@material-ui/core';
 import styles from './Car.module.css';
 import { honk } from '../api';
-
+import WarningIcon from '@material-ui/icons/Warning';
 
 
 const handleHonk = async (e, id) => {
@@ -46,7 +46,7 @@ const Car = ( {car} ) => {
                     {console.log("id_s", car.data.response.id_s)}
                     <form onClick = {e => handleHonk(e, car.data.response.id_s)}>
 
-                        <button className="button" type="submit" >Honk</button>
+                        <Button variant="contained" color="default" startIcon={<WarningIcon />}>Honk</Button>
                     </form>
 
                 </CardContent>
