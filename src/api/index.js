@@ -5,6 +5,10 @@ const url = 'https://cors-anywhere.herokuapp.com/https://owner-api.teslamotors.c
 const AUTHORIZATION_KEY = process.env.REACT_APP_TESLA_AUTHORIZATION_KEY;
 const headers = {
       'Authorization': `Bearer ${AUTHORIZATION_KEY}`,
+       //'Content-Type': 'application/json; charset=utf-8',
+       //'Content-Type': 'application/x-www-form-urlencoded',
+ 
+
     };
  
 
@@ -12,7 +16,8 @@ const headers = {
 export const fetchData = async () => {
    
     try {
-        const { data: { response } } = await axios.get(url, { headers });
+        const { data: { response } } = await axios.get(url, 
+        { headers });
  
         return { response };
         
@@ -44,6 +49,23 @@ export const fetchDetails =  async(id) => {
         const { data: { response } } = await axios.get(detailsUrl, { headers });
  
         return { response };
+        
+    } catch (error) {
+        console.log("Error")
+        return error
+    }
+ 
+ }
+
+
+ export const honk =  async(id) => {   
+    const honkUrl = `${url}/${id}/command/honk_horn`
+    console.log("honkUrl", honkUrl)
+ 
+    try {
+        const response = await axios.post(honkUrl, null, { headers });
+ 
+        return response;
         
     } catch (error) {
         console.log("Error")
