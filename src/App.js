@@ -3,13 +3,18 @@ import { fetchData, fetchDetailedInfo } from './api/';
 import { CardContent, Typography, Grid, Button, Card, CardHeader} from '@material-ui/core';
 import Car from './components/Car';
 import InfoIcon from '@material-ui/icons/Info';
-import Header from "./components/Header";
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
+import Header from "./components/Header";
+ 
 
  class App extends React.Component {
   state = {
     data: {},
     myCars: [],
+    isHovering: false,
+    
   }
 
   async componentDidMount() {
@@ -31,18 +36,34 @@ import Header from "./components/Header";
   }
 
   
+  handleMouseHover = () => {
+    this.setState(this.toggleHoverState);
+ 
+  }
+
+  toggleHoverState(state) {
+    return {
+      isHovering: !state.isHovering,
+    };
+  }
 
 
   render() {
     
 
-    const { data, myCars} = this.state;
+    const { data, myCars, isHovering } = this.state;
+
+
+
+ 
  
     if(!data.response) {
       return "Loading"
     }
 
-
+     
+ 
+ 
     return (
 
       <Grid container direction="column">
@@ -63,9 +84,21 @@ import Header from "./components/Header";
                      />
 
 
-                    <CardContent>
-                       <Typography variant="body2" component="p">ID: {vehicle.id_s}</Typography>
-                      <Typography variant="body2" component="p">VIN: {vehicle.vin}</Typography>
+                    <CardContent onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover} >
+                      {isHovering  ? 
+                          <div> 
+                              <Typography variant="body2" component="p">ID: <VisibilityIcon color="primary" fontSize="small"/> {vehicle.id}</Typography>
+                              <Typography variant="body2" component="p">VIN: <VisibilityIcon color="primary" fontSize="small"/> {vehicle.vin}</Typography>
+                            </div>
+                       :    
+                       
+                          <div>
+                            <Typography variant="body2" component="p">ID: <VisibilityOffIcon color="secondary" fontSize="small"/></Typography>
+                            <Typography variant="body2" component="p">VIN: <VisibilityOffIcon color="secondary" fontSize="small"/></Typography>
+                          </div>
+
+                      }
+
                       <Typography variant="body2" component="p">State: {vehicle.state}</Typography>
                     </CardContent>
                     </Card>
