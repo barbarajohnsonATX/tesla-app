@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchData, fetchDetailedInfo } from './api/';
-import { CardContent, Typography, Grid, Button} from '@material-ui/core';
+import { CardContent, Typography, Grid, Button, Card, CardHeader} from '@material-ui/core';
 import Car from './components/Car';
 import InfoIcon from '@material-ui/icons/Info';
 import Header from "./components/Header";
@@ -55,15 +55,20 @@ import Header from "./components/Header";
               <Grid item xs={false} sm={2} />
 
               { data.response.map( (vehicle, id) => 
-                  <Grid item xs={12} sm={5} key={id} className="vehicle">
+
+                  <Grid item xs={12} sm={4} key={id} className="vehicle">
+                    <Card>
+                    <CardHeader
+                            title={vehicle.display_name}
+                     />
+
 
                     <CardContent>
-                      <Typography color="textPrimary" >Name: {vehicle.display_name}</Typography >
-                      <Typography color="textSecondary">ID: {vehicle.id_s}</Typography>
-                      <Typography color="textSecondary">VIN: {vehicle.vin}</Typography>
-                      <Typography color="textSecondary">State: {vehicle.state}</Typography>
+                       <Typography variant="body2" component="p">ID: {vehicle.id_s}</Typography>
+                      <Typography variant="body2" component="p">VIN: {vehicle.vin}</Typography>
+                      <Typography variant="body2" component="p">State: {vehicle.state}</Typography>
                     </CardContent>
-
+                    </Card>
                   </Grid>
 
               )}
@@ -79,7 +84,7 @@ import Header from "./components/Header";
               <Button onClick = {e => this.handleDetails(e)} style={{backgroundColor: "#654F97", color: 'white'}} variant="contained" startIcon={<InfoIcon />}>Details</Button>
           </Grid>
 
-         <Grid container sapcing={2} justify="center" >
+         <Grid container justify="center" >
          <  Grid item xs={false} sm={2} />
 
                    { myCars.map( (car, id) => <Car car={car} key={id}/> )  }
