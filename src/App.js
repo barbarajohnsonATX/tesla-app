@@ -1,23 +1,22 @@
 import React from 'react';
-import styles from './App.module.css';
 import { fetchData, fetchDetailedInfo } from './api/';
 import { CardContent, Typography, Grid, Button} from '@material-ui/core';
 import Car from './components/Car';
 import InfoIcon from '@material-ui/icons/Info';
+import Header from "./components/Header";
+
 
  class App extends React.Component {
   state = {
     data: {},
-  //  details: {},
     myCars: [],
-    }
+  }
 
   async componentDidMount() {
     const fetchedData = await fetchData();
     console.log(fetchedData)
     this.setState({ data: fetchedData });
   }
-
 
 
   handleDetails = async (e) => {
@@ -31,28 +30,32 @@ import InfoIcon from '@material-ui/icons/Info';
 
   }
 
-
-
- 
+  
 
 
   render() {
-    const { data, details, myCars} = this.state;
+    
+
+    const { data, myCars} = this.state;
  
     if(!data.response) {
       return "Loading"
     }
 
-   // let detailsExist = !!details.data
-   // console.log("detailsExist", detailsExist)
 
     return (
-      <div className={styles.container}>
+
+      <Grid container direction="column">
+          <Grid item>
+              <Header />
+          </Grid>
  
-        <Grid container spacing={3} justify="space-evenly">
+ 
+           <Grid item container>
+              <Grid item xs={false} sm={2} />
 
               { data.response.map( (vehicle, id) => 
-                  <Grid item xs={12} md={2} key={id} className="vehicle">
+                  <Grid item xs={12} sm={5} key={id} className="vehicle">
 
                     <CardContent>
                       <Typography color="textPrimary" >Name: {vehicle.display_name}</Typography >
@@ -64,26 +67,32 @@ import InfoIcon from '@material-ui/icons/Info';
                   </Grid>
 
               )}
-  
-
+                  <Grid item xs={false} sm={2} />
+            </Grid>
                 
-         </Grid>
  
 
-        {/* <form onClick = {e => this.handleDetails(e)}> */}
-                  <Button onClick = {e => this.handleDetails(e)} color="primary" variant="contained" startIcon={<InfoIcon />}>Details</Button>
-        {/* </form>   */}
- 
 
-         <Grid container sapcing={3} justify="space-evenly" >
+
  
+          <Grid item container justify="center">
+              <Button onClick = {e => this.handleDetails(e)} style={{backgroundColor: "#654F97", color: 'white'}} variant="contained" startIcon={<InfoIcon />}>Details</Button>
+          </Grid>
+
+         <Grid container sapcing={2} justify="center" >
+         <  Grid item xs={false} sm={2} />
+
                    { myCars.map( (car, id) => <Car car={car} key={id}/> )  }
- 
+          <Grid item xs={false} sm={2} />
+
           </Grid>
  
        
-      </div>
-    );
+      {/* </div> */}
+
+      </Grid>
+
+     );
   }
 }
 
