@@ -1,6 +1,6 @@
 import React from 'react';
-import { fetchData, fetchDetailedInfo } from './api/';
-import { CardContent, Typography, Grid, Button, Card, CardHeader} from '@material-ui/core';
+import { fetchData, fetchDetailedInfo, wake } from './api/';
+import { CardContent, Typography, Grid, Button, Card, CardHeader, CardActions } from '@material-ui/core';
 import Car from './components/Car';
 import InfoIcon from '@material-ui/icons/Info';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -46,6 +46,16 @@ import Header from "./components/Header";
       isHovering: !state.isHovering,
     };
   }
+
+  handleWake = async (e, id) => {
+    e.preventDefault()
+       const response = await wake(id)
+       console.log("wake response", response)
+       const fetchedData = await fetchData();
+       console.log(fetchedData)
+       this.setState({ data: fetchedData });
+
+}
 
 
   render() {
@@ -101,6 +111,17 @@ import Header from "./components/Header";
 
                       <Typography variant="body2" component="p">State: {vehicle.state}</Typography>
                     </CardContent>
+
+
+                    <CardActions>
+                      {vehicle.state === 'asleep' ? 
+                         <Button onClick = {e => this.handleWake(e, vehicle.id_s)}>Wake</Button>
+ 
+                      : "" }
+                
+                    </CardActions>
+
+
                     </Card>
                   </Grid>
 

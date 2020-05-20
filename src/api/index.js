@@ -114,3 +114,21 @@ export const fetchDetailedInfo = async (id) => {
     }
  
  }
+
+ 
+ export const wake =  async(id) => {   
+    const wake = `${url}/${id}/wake_up`
+    console.log("wake", wake)
+ 
+
+    try {
+        const response = await axios.post(wake, null, { headers });
+ 
+        return response
+        
+    } catch (error) {
+        console.log("Error")
+        return error
+    }
+ 
+ }
